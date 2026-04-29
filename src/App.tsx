@@ -8,12 +8,19 @@ import { useFlights } from "./features/flights/hooks/useFlights";
 
 function App() {
   const state = useFlights();
-
-  // Dummy AOC options for demonstration
-  const aocOptions = ["FD", "D7", "QZ", "AK"];
+  const aocOptions = Array.from(new Set(state.flights.map((flight) => flight.aoc))).sort();
 
   return (
     <MainLayout onClearAll={state.clearAllFilters} onRefresh={state.refreshFlights}>
+      {state.errorMessage ? (
+        <div className="alert-banner">
+          <span>{state.errorMessage}</span>
+          <button className="btn btn-outline" onClick={state.clearError}>
+            Dismiss
+          </button>
+        </div>
+      ) : null}
+
       <div className="top-bar">
         <FlightSearch value={state.search} onChange={state.setSearch} />
         <FlightFilters
@@ -33,6 +40,8 @@ function App() {
         selected={state.selected}
         setSelected={state.setSelected}
         toggleStatus={state.toggleStatus}
+        updateFlight={state.updateFlight}
+        savingIds={state.savingIds}
       />
     </MainLayout>
   );

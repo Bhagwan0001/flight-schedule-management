@@ -1,8 +1,8 @@
-import { FilterX, RefreshCw } from "lucide-react";
+import { FilterX } from "lucide-react";
 
 type HeaderProps = {
-  onClearAll?: () => void;
   onRefresh?: () => void;
+  onClearAll?: () => void;
 };
 
 export const Header = ({ onClearAll }: HeaderProps) => {
@@ -12,7 +12,6 @@ export const Header = ({ onClearAll }: HeaderProps) => {
         <h1>Flight Schedule Management</h1>
         <p className="subtext">View, search, filter and manage flight schedules</p>
       </div>
-
       <div className="header-actions">
         <button className="btn btn-outline" onClick={onClearAll}>
           <FilterX size={16} />

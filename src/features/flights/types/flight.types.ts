@@ -1,5 +1,6 @@
 export type FlightStatus = "Active" | "Inactive";
 export type BodyType = "narrow_body" | "wide_body";
+export type EditableFlightFields = Pick<Flight, "startDate" | "std" | "sta" | "status">;
 
 export interface Flight {
   id: string;

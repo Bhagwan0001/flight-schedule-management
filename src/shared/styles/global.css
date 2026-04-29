@@ -32,22 +32,42 @@
 .filters-bar {
   display: flex;
   gap: 12px;
-  align-items: center;
+  align-items: flex-end;
   flex-wrap: wrap;
 }
-.filter-select {
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   min-width: 150px;
+  flex: 1 1 150px;
 }
-.filter-select .MuiInputBase-root {
+.filter-field label {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 600;
+}
+.filter-select {
+  min-width: 170px;
+}
+.filter-select .MuiInputBase-root,
+.filter-field .MuiInputBase-root {
   height: 42px;
   border-radius: 10px;
   background: #fff;
 }
-.filter-select .MuiOutlinedInput-notchedOutline {
+.filter-select .MuiOutlinedInput-notchedOutline,
+.filter-field .MuiOutlinedInput-notchedOutline {
   border-color: #d1d5db;
 }
-.filter-select .MuiInputBase-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+.filter-select .MuiInputBase-root.Mui-focused .MuiOutlinedInput-notchedOutline,
+.filter-field .MuiInputBase-root.Mui-focused .MuiOutlinedInput-notchedOutline {
   border-color: #c7d2fe;
+}
+.filter-clear-btn {
+  height: 42px;
+  align-self: flex-end;
+  margin-right: 0;
 }
 
 /* TABLE FOOTER & PAGINATION */
@@ -300,7 +320,7 @@ body {
   flex: 1 1 260px;
 }
 .top-bar .filters-bar {
-  flex: 2 1 520px;
+  flex: 3 1 760px;
 }
 
 /* BUTTONS */
@@ -385,7 +405,19 @@ body {
 
 .table-header {
   display: grid;
-  grid-template-columns: 44px repeat(9, 1fr);
+  width: 100%;
+  grid-template-columns:
+    44px
+    minmax(70px, 0.72fr)
+    minmax(52px, 0.45fr)
+    minmax(70px, 0.56fr)
+    minmax(68px, 0.64fr)
+    minmax(76px, 0.72fr)
+    minmax(92px, 0.82fr)
+    minmax(62px, 0.5fr)
+    minmax(62px, 0.5fr)
+    minmax(78px, 0.56fr)
+    minmax(130px, 0.95fr);
   padding: 14px 18px;
   background: #f9fafb;
   font-size: 12px;
@@ -405,16 +437,33 @@ body {
 
 .table-row {
   display: grid;
-  grid-template-columns: 44px repeat(9, 1fr);
-  padding: 16px 18px;
+  width: 100%;
+  grid-template-columns:
+    44px
+    minmax(70px, 0.72fr)
+    minmax(52px, 0.45fr)
+    minmax(70px, 0.56fr)
+    minmax(68px, 0.64fr)
+    minmax(76px, 0.72fr)
+    minmax(92px, 0.82fr)
+    minmax(62px, 0.5fr)
+    minmax(62px, 0.5fr)
+    minmax(78px, 0.56fr)
+    minmax(130px, 0.95fr);
+  padding: 12px 18px;
   align-items: center;
   border-top: 1px solid #f1f5f9;
   font-size: 13px;
   column-gap: 12px;
+  min-height: 76px;
 }
 
 .table-row:hover {
   background: #f9fafb;
+}
+
+.table-row.is-saving {
+  opacity: 0.82;
 }
 
 .table-header > span,
@@ -422,6 +471,71 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.table-cell-input {
+  width: 100%;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font: inherit;
+  background: #fff;
+}
+
+.row-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: flex-start;
+  min-width: 0;
+  flex-wrap: nowrap;
+}
+
+.row-action-btn {
+  margin-right: 0;
+  padding: 6px 10px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  font-size: 12px;
+  line-height: 1.1;
+  border-radius: 7px;
+}
+
+.row-edit-btn {
+  min-width: 56px;
+  justify-content: center;
+}
+
+.row-actions .MuiSwitch-root {
+  flex-shrink: 0;
+  margin-left: 2px;
+}
+
+.row-save-btn {
+  min-width: 54px;
+}
+
+.row-cancel-btn {
+  min-width: 62px;
+}
+
+.btn-spinner {
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-top-color: #ffffff;
+  border-radius: 999px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .table-empty {
@@ -478,6 +592,19 @@ body {
   gap: 10px;
   margin: 14px 0;
   align-items: center;
+}
+
+.alert-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 12px 14px;
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #991b1b;
+  border-radius: 12px;
 }
 
 /* PAGINATION */

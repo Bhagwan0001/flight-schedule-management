@@ -3,13 +3,25 @@ import type { ListChildComponentProps } from "react-window";
 import { FlightRow } from "./FlightRow";
 
 import { useEffect, useMemo, useState } from "react";
+import type { EditableFlightFields, Flight } from "../types/flight.types";
+
+type FlightTableProps = {
+  flights: Flight[];
+  selected: string[];
+  setSelected: (updater: string[] | ((prev: string[]) => string[])) => void;
+  toggleStatus: (id: string) => void;
+  updateFlight: (id: string, updates: EditableFlightFields) => Promise<boolean>;
+  savingIds: string[];
+};
 
 export const FlightTable = ({
   flights,
   selected,
   setSelected,
   toggleStatus,
-}: any) => {
+  updateFlight,
+  savingIds,
+}: FlightTableProps) => {
   const [viewportHeight, setViewportHeight] = useState(() =>
     typeof window !== "undefined" ? window.innerHeight : 900
   );
@@ -59,6 +71,7 @@ export const FlightTable = ({
         <span>Flight No</span>
         <span>Origin</span>
         <span>Destination</span>
+        <span>Date</span>
         <span>STD</span>
         <span>STA</span>
         <span>Status</span>
@@ -71,7 +84,7 @@ export const FlightTable = ({
           <List
             height={listHeight}
             itemCount={paginatedFlights.length}
-            itemSize={60}
+            itemSize={76}
             width="100%"
           >
             {({ index, style }: ListChildComponentProps) => (
@@ -81,6 +94,8 @@ export const FlightTable = ({
                   selected={selected}
                   setSelected={setSelected}
                   toggleStatus={toggleStatus}
+                  updateFlight={updateFlight}
+                  isSaving={savingIds.includes(paginatedFlights[index].id)}
                 />
               </div>
             )}

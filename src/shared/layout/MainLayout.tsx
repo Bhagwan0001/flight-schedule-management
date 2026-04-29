@@ -7,7 +7,7 @@ export const MainLayout = ({ children, onClearAll, onRefresh }: any) => {
       <Sidebar />
       <div className="content">
         <div className="content-inner">
-          <Header onClearAll={onClearAll} onRefresh={onRefresh} />
+          <Header onRefresh={onRefresh} onClearAll={onClearAll} />
           {children}
         </div>
       </div>

@@ -6,13 +6,14 @@ export const filterFlights = (
   search: string
 ): Flight[] => {
   const searchText = search.trim().toLowerCase();
+  const filterStart = filters.fromDate || filters.toDate;
+  const filterEnd = filters.toDate || filters.fromDate;
 
   return flights.filter((f) => {
     const matchesDate =
-      !filters.fromDate ||
-      !filters.toDate ||
-      (f.startDate <= filters.toDate &&
-        f.endDate >= filters.fromDate);
+      !filterStart ||
+      !filterEnd ||
+      (f.startDate <= filterEnd && f.endDate >= filterStart);
 
     const matchesDays =
       !filters.days?.length ||
